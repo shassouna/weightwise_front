@@ -1,0 +1,91 @@
+/* components/Header.module.css */
+
+.header {
+  background: #333;
+  color: #fff;
+  height: 80px;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.logo {
+  flex: 1;
+}
+
+.nav {
+  display: flex;
+  flex: 2;
+  justify-content: end;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.navLink {
+  color: #fff;
+  text-decoration: none;
+  padding: 0 15px;
+  font-size: 20px;
+}
+
+.mobileMenuButton {
+  display: none; /* Hide by default */
+  background: #444;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: #333;
+  width: 200px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.mobileNavList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobileNavLink {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+}
+.li {
+  display: flex;
+  align-items: flex-start;
+}
+/* Media Queries */
+@media (max-width: 768px) {
+  .nav {
+    display: none; /* Hide the main nav */
+  }
+
+  .mobileMenuButton {
+    display: block; /* Show mobile menu button */
+  }
+}
