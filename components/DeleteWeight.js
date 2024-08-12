@@ -54,9 +54,27 @@ const DeleteWeight = ({
                   <p className="fs-5">
                     Voulez vous vraiment supprimer le poids.
                   </p>
-                  <button type="submit" className="btn btn-danger">
-                    {loading ? "Suppression..." : "Supprimer"}
-                  </button>
+                  {!loading ? (
+                    <button
+                      className="btn btn-dark fs-4"
+                      type="submit"
+                      disabled={false}
+                    >
+                      Supprimer
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-dark fs-4"
+                      type="submit"
+                      disabled
+                    >
+                      <span role="status mr-2">suppression...</span>
+                      <span
+                        class="spinner-border spinner-border-sm"
+                        aria-hidden="true"
+                      ></span>
+                    </button>
+                  )}
                 </>
               )}
               {error && (

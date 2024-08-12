@@ -13,6 +13,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // Close Modal function
   const closeModal = () => {
@@ -22,6 +23,7 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     try {
       const res = await axios.post(
@@ -31,9 +33,8 @@ function Login() {
           password: password,
         }
       );
-
+      setTimeout(() => {}, 2000);
       Cookies.set("token", res.data.jwt, { expires: 7, path: "" });
-
       router.push("/");
     } catch (error) {
       if (
@@ -47,13 +48,15 @@ function Login() {
       } else {
         setError("Une erreur est survenue. Veuillez réessayer.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <Modal isOpen={isModalOpen} onClose={closeModal}>
-      <br />
       <form style={{ minWidth: "370px" }} onSubmit={handleSubmit}>
+        <br />
         <div tabIndex="-1" role="dialog">
           <div role="document">
             <div className="modal-body">
@@ -79,9 +82,23 @@ function Login() {
               </div>
               <br />
               <div className="m-3 d-flex justify-content-center">
-                <button type="submit" className="btn btn-dark w-50 ">
-                  Se Connecter
-                </button>
+                {!loading ? (
+                  <button
+                    className="btn btn-dark w-50"
+                    type="submit"
+                    disabled={false}
+                  >
+                    Se connecter
+                  </button>
+                ) : (
+                  <button className="btn btn-dark w-50" type="submit" disabled>
+                    <span role="status mr-2">Connexion...</span>
+                    <span
+                      class="spinner-border spinner-border-sm"
+                      aria-hidden="true"
+                    ></span>
+                  </button>
+                )}
               </div>
               {error && <p className="text-danger text-center"> {error}</p>}
             </div>

@@ -353,16 +353,33 @@ const AddWeightPage = (props) => {
                   </div>
                 </div>
                 <div className="text-center mt-5">
-                  <button
-                    className="btn btn-dark fs-4"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="Mettre à jour la séance"
-                    type="submit"
-                    disabled={loading}
-                  >
-                    {loading ? "Enregistrement..." : "Enregistrer"}
-                  </button>
+                  {!loading ? (
+                    <button
+                      className="btn btn-dark fs-4"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Mettre à jour la séance"
+                      type="submit"
+                      disabled={false}
+                    >
+                      Enregistrer
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-dark fs-4"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Mettre à jour la séance"
+                      type="submit"
+                      disabled
+                    >
+                      <span role="status mr-2">Enregistrement...</span>
+                      <span
+                        class="spinner-border spinner-border-sm"
+                        aria-hidden="true"
+                      ></span>
+                    </button>
+                  )}
 
                   <div className="mt-4 text-center">
                     {error && <p style={{ color: "red" }}>{error}</p>}

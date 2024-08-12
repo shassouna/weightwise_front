@@ -49,10 +49,15 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <div>
-          <nav>
+          <nav className={styles.nav}>
             <ul className={styles.navList}>
               {!isLoggedIn && (
                 <>
+                  <li className={styles.li}>
+                    <Link href="/" className={styles.navLink}>
+                      Accueil
+                    </Link>
+                  </li>
                   <li className={styles.li}>
                     <Link href={"/register"} className={styles.navLink}>
                       S'inscrire
@@ -60,7 +65,7 @@ const Header = () => {
                   </li>
                   <li className={styles.li}>
                     <Link href="/login" className={styles.navLink}>
-                      Se Connecter
+                      Se connecter
                     </Link>
                   </li>
                 </>
@@ -77,11 +82,6 @@ const Header = () => {
         </div>
         <nav className={styles.nav}>
           <ul className={styles.navList}>
-            <li className={styles.li}>
-              <Link href="/" className={styles.navLink}>
-                Accueil
-              </Link>
-            </li>
             <li className={styles.li}>
               <Link
                 href={userId ? `/users/${userId}` : "/login"}
@@ -106,11 +106,19 @@ const Header = () => {
         {isMobileMenuOpen && (
           <nav className={styles.mobileNav}>
             <ul className={styles.mobileNavList}>
+              <br />
               <li className={styles.li}>
-                <Link href="/" className={styles.navLink}>
-                  Accueil
+                <Link href={"/login"} className={styles.navLink}>
+                  Se connecter
                 </Link>
               </li>
+              <br />
+              <li className={styles.li}>
+                <Link href={"/register"} className={styles.navLink}>
+                  S'inscrire
+                </Link>
+              </li>
+              <br />
               <li className={styles.li}>
                 <Link
                   href={userId ? `/users/${userId}` : "/login"}
@@ -119,6 +127,7 @@ const Header = () => {
                   Mes Entrainements
                 </Link>
               </li>
+              <br />
               <li className={styles.li}>
                 <Link
                   href={userId ? `/add-session` : "/login"}

@@ -13,6 +13,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // Close Modal function
   const closeModal = () => {
@@ -22,6 +23,7 @@ function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     try {
       await axios.post(
@@ -45,6 +47,8 @@ function Register() {
       } else {
         setError("Une erreur est survenue. Veuillez réessayer.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,49 +56,75 @@ function Register() {
     <Modal isOpen={isModalOpen} onClose={closeModal}>
       <br />
       <form style={{ minWidth: "370px" }} onSubmit={handleSubmit}>
-        <div tabIndex="-1" role="dialog">
-          <div role="document">
-            <div className="modal-body">
-              <div className="m-3">
-                <input
-                  className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
-                  type="text"
-                  placeholder="Nom"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
+        {!loading ? (
+          <div tabIndex="-1" role="dialog">
+            <div role="document">
+              <div className="modal-body">
+                <div className="m-3">
+                  <input
+                    className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
+                    type="text"
+                    placeholder="Nom"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="m-3">
+                  <input
+                    className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
+                    type="email"
+                    placeholder="email@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="m-3">
+                  <input
+                    className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
+                    type="password"
+                    placeholder="Mdp"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <br />
+                <div className="m-3 d-flex justify-content-center">
+                  {!loading ? (
+                    <button
+                      className="btn btn-dark w-50"
+                      type="submit"
+                      disabled={false}
+                    >
+                      S'inscrire
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-dark w-50"
+                      type="submit"
+                      disabled
+                    >
+                      <span role="status mr-2">Inscription...</span>
+                      <span
+                        class="spinner-border spinner-border-sm"
+                        aria-hidden="true"
+                      ></span>
+                    </button>
+                  )}
+                </div>
+                {error && <p className="text-danger text-center"> {error}</p>}
               </div>
-              <div className="m-3">
-                <input
-                  className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
-                  type="email"
-                  placeholder="email@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="m-3">
-                <input
-                  className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
-                  type="password"
-                  placeholder="Mdp"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <br />
-              <div className="m-3 d-flex justify-content-center">
-                <button type="submit" className="btn btn-dark w-50 ">
-                  S'inscrire
-                </button>
-              </div>
-              {error && <p className="text-danger text-center"> {error}</p>}
             </div>
           </div>
-        </div>
+        ) : (
+          <div class="text-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
       </form>
     </Modal>
   );

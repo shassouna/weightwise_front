@@ -153,8 +153,8 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
       setError("Erreur lors de l'enregistrement des données");
     } finally {
       // Restore the weight entry in the database
-      setIsModalOpen(true);
       setLoading(false);
+      setIsModalOpen(true);
     }
   };
 
@@ -319,13 +319,23 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
                 </div>
               </div>
               <div className="text-center mt-5">
-                <button
-                  className="btn btn-dark fs-4"
-                  type="submit"
-                  disabled={loading}
-                >
-                  {loading ? "Enregistrement..." : "Enregistrer"}
-                </button>
+                {!loading ? (
+                  <button
+                    className="btn btn-dark fs-4"
+                    type="submit"
+                    disabled={false}
+                  >
+                    Enregistrer
+                  </button>
+                ) : (
+                  <button className="btn btn-dark fs-4" type="submit" disabled>
+                    <span role="status mr-2">Enregistrement...</span>
+                    <span
+                      class="spinner-border spinner-border-sm"
+                      aria-hidden="true"
+                    ></span>
+                  </button>
+                )}
 
                 <div className="mt-4 text-center">
                   {error && <p style={{ color: "red" }}>{error}</p>}
