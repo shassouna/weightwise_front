@@ -63,16 +63,15 @@ const UserPage = ({ workout_sessions }) => {
           <table className="table w-75" style={{ minWidth: "400px" }}>
             <thead>
               <tr>
-                <th scope="col" className="text-center">
+                <th scope="col" className="text-start">
                   Date
                 </th>
-                <th scope="col" className="text-center">
+                <th scope="col" className="text-start">
                   Muscles
                 </th>
-                <th scope="col" className="text-center">
+                <th scope="col" className="text-start">
                   Exercises
                 </th>
-                <th scope="col" className="text-center"></th>
               </tr>
             </thead>
             <tbody>
@@ -86,19 +85,18 @@ const UserPage = ({ workout_sessions }) => {
                 );
 
                 return (
-                  <tr key={workout.id}>
-                    <th scope="row" className="text-center">
+                  <tr key={workout.id} className="table-light">
+                    <td scope="row" className="text-start">
                       {workout.date}
-                    </th>
-                    <td className="text-center">
-                      {uniqueWeightEntries.map((weight) => (
-                        <div key={weight.id}>
+                    </td>
+                    <td className="text-start">
+                      {uniqueWeightEntries.map((weight, index) => (
+                        <div key={weight.id} className="list-unstyled">
                           {weight.muscle_group.name}
-                          <br />
                         </div>
                       ))}
                     </td>
-                    <td className="text-center">
+                    <td className="text-start">
                       {uniqueExercisesEntries.map((weight) => (
                         <div key={weight.id}>
                           {weight.exercise.name}

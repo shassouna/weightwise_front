@@ -310,7 +310,7 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
                   <div className="w-100 text-center">
                     <div
                       type="button"
-                      className="fs-1 text-success"
+                      className="fs-1 text-dark"
                       onClick={handleAddEntry}
                     >
                       +
@@ -321,14 +321,18 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
               <div className="text-center mt-5">
                 {!loading ? (
                   <button
-                    className="btn btn-dark fs-4"
+                    className="btn btn-success fs-4"
                     type="submit"
                     disabled={false}
                   >
                     Enregistrer
                   </button>
                 ) : (
-                  <button className="btn btn-dark fs-4" type="submit" disabled>
+                  <button
+                    className="btn btn-success fs-4"
+                    type="submit"
+                    disabled
+                  >
                     <span role="status mr-2">Enregistrement...</span>
                     <span
                       class="spinner-border spinner-border-sm"

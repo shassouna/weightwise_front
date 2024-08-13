@@ -355,7 +355,7 @@ const AddWeightPage = (props) => {
                 <div className="text-center mt-5">
                   {!loading ? (
                     <button
-                      className="btn btn-dark fs-4"
+                      className="btn btn-success fs-4"
                       data-toggle="tooltip"
                       data-placement="top"
                       title="Mettre à jour la séance"
@@ -366,7 +366,7 @@ const AddWeightPage = (props) => {
                     </button>
                   ) : (
                     <button
-                      className="btn btn-dark fs-4"
+                      className="btn btn-success fs-4"
                       data-toggle="tooltip"
                       data-placement="top"
                       title="Mettre à jour la séance"
