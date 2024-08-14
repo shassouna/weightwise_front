@@ -3,6 +3,8 @@ import axios from "axios";
 import qs from "qs";
 import DeleteWeight from "@/components/DeleteWeight";
 import SuccessMessage from "@/components/SuccessMessage";
+import { parseCookies } from "nookies";
+import * as jwt from "jwt-decode";
 
 const today = new Date();
 const todayString = today.toISOString().split("T")[0];
@@ -19,6 +21,7 @@ const AddWeightPage = (props) => {
   const [selectedWeightToDelete, setSelectedWeightToDelete] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   // add weight entry
   const handleAddEntry = () => {
     setWeights([
@@ -412,12 +415,36 @@ const AddWeightPage = (props) => {
 
 export default AddWeightPage;
 
+const verifyToken = (token) => {
+  try {
+    const decoded = jwt.jwtDecode(token);
+    const now = Math.floor(Date.now() / 1000);
+    if (decoded.exp > now) {
+      return decoded;
+    } else {
+      return false;
+    }
+  } catch (err) {
+    return false;
+  }
+};
+
 export async function getServerSideProps(context) {
-  const querySessions = qs.stringify({
-    populate: ["weight_entries.exercise", "weight_entries.muscle_group"],
-  });
+  const { token } = parseCookies(context);
+
+  if (!token || !verifyToken(token)) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
 
   try {
+    const querySessions = qs.stringify({
+      populate: ["weight_entries.exercise", "weight_entries.muscle_group"],
+    });
     const responseExercises = await axios.get(
       `${process.env.NEXT_PUBLIC_BASE_URL_SERVER}/api/exercises`
     );

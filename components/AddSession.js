@@ -7,7 +7,9 @@ const AddSession = ({
   error,
   success,
   alreadyExist,
+  sessionId,
 }) => {
+  console.log(sessionId);
   const router = useRouter();
 
   // close Modal function
