@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Modal from "./Popup";
 import { useRouter } from "next/router";
 

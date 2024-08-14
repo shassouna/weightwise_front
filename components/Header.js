@@ -48,38 +48,11 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <div>
-          <nav className={styles.nav}>
-            <ul className={styles.navList}>
-              {!isLoggedIn && (
-                <>
-                  <li className={styles.li}>
-                    <Link href="/" className={styles.navLink}>
-                      Accueil
-                    </Link>
-                  </li>
-                  <li className={styles.li}>
-                    <Link href={"/register"} className={styles.navLink}>
-                      S'inscrire
-                    </Link>
-                  </li>
-                  <li className={styles.li}>
-                    <Link href="/login" className={styles.navLink}>
-                      Se connecter
-                    </Link>
-                  </li>
-                </>
-              )}
-              {isLoggedIn && (
-                <li onClick={handleSignOut}>
-                  <Link href="/#" className={styles.navLink}>
-                    Se Deconnecter
-                  </Link>
-                </li>
-              )}
-            </ul>
-          </nav>
-        </div>
+        <nav className={styles.navLogo}>
+          <Link href="/" className={styles.navLink}>
+            <img src="/main-logo-transparent.svg" alt="Logo" width="100%" />
+          </Link>
+        </nav>
         <nav className={styles.nav}>
           <ul className={styles.navList}>
             <li className={styles.li}>
@@ -98,27 +71,61 @@ const Header = () => {
                 Enregistrer Entrainement
               </Link>
             </li>
+            {!isLoggedIn ? (
+              <>
+                <li className={styles.li}>
+                  <Link
+                    href={"/register"}
+                    className={styles.navLink}
+                    style={{ color: "green" }}
+                  >
+                    Inscription
+                  </Link>
+                </li>
+                <li className={styles.li}>
+                  <Link
+                    href="/login"
+                    className={styles.navLink}
+                    style={{ color: "green" }}
+                  >
+                    Connexion
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <li onClick={handleSignOut} className={styles.li}>
+                <Link
+                  href="/#"
+                  className={styles.navLink}
+                  style={{
+                    color: "red",
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  }}
+                >
+                  Déconnexion
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
-        <button className={styles.mobileMenuButton} onClick={toggleMobileMenu}>
-          {isMobileMenuOpen ? "Close Menu" : "Open Menu"}
-        </button>
+
+        {!isMobileMenuOpen ? (
+          <img
+            src="/open-menu.svg"
+            className={styles.mobileMenuButton}
+            onClick={toggleMobileMenu}
+          ></img>
+        ) : (
+          <img
+            src="/close-menu.svg"
+            className={styles.mobileMenuButton}
+            onClick={toggleMobileMenu}
+          ></img>
+        )}
+
         {isMobileMenuOpen && (
           <nav className={styles.mobileNav}>
             <ul className={styles.mobileNavList}>
-              <br />
-              <li className={styles.li}>
-                <Link href={"/login"} className={styles.navLink}>
-                  Se connecter
-                </Link>
-              </li>
-              <br />
-              <li className={styles.li}>
-                <Link href={"/register"} className={styles.navLink}>
-                  S'inscrire
-                </Link>
-              </li>
-              <br />
               <li className={styles.li}>
                 <Link
                   href={userId ? `/users/${userId}` : "/login"}
@@ -127,7 +134,6 @@ const Header = () => {
                   Mes Entrainements
                 </Link>
               </li>
-              <br />
               <li className={styles.li}>
                 <Link
                   href={userId ? `/add-session` : "/login"}
@@ -136,6 +142,38 @@ const Header = () => {
                   Enregistrer Entrainement
                 </Link>
               </li>
+              {!isLoggedIn ? (
+                <>
+                  <li className={styles.li}>
+                    <Link
+                      href={"/register"}
+                      className={styles.navLink}
+                      style={{ color: "green" }}
+                    >
+                      Inscription
+                    </Link>
+                  </li>
+                  <li className={styles.li}>
+                    <Link
+                      href="/login"
+                      className={styles.navLink}
+                      style={{ color: "green" }}
+                    >
+                      Connexion
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <li onClick={handleSignOut} className={styles.li}>
+                  <Link
+                    href="/#"
+                    className={styles.navLink}
+                    style={{ color: "crimson" }}
+                  >
+                    Déconnexion
+                  </Link>
+                </li>
+              )}
             </ul>
           </nav>
         )}

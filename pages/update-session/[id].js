@@ -319,7 +319,7 @@ const AddWeightPage = (props) => {
                             htmlFor="NombreDeRepetitionInput"
                             className="w-100 p-2 text-warning text-center"
                           >
-                            Nombre de Séries
+                            Nombre de Répétitions
                           </label>
                           <input
                             style={{ fontWeight: "bold" }}

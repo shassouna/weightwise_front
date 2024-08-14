@@ -3,7 +3,7 @@
 .header {
   background: #212529;
   color: #fff;
-  height: 80px;
+  height: 120px;
   width: 100%;
   padding: 10px 0;
 }
@@ -13,7 +13,7 @@
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  max-width: 90%;
+  max-width: 95%;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -26,11 +26,20 @@
   display: flex;
   flex: 2;
   justify-content: end;
+  height: 100%;
+}
+.navLogo {
+  display: flex;
+  flex: 2;
+  justify-content: start;
+  height: 100%;
 }
 
 .navList {
   list-style: none;
   display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0;
   margin: 0;
 }
@@ -38,32 +47,18 @@
 .navLink {
   color: #fff;
   text-decoration: none;
-  padding: 0 20px;
-  font-size: 1.2rem;
+  padding: 10px;
+  font-size: 1rem;
   font-family: "Roboto", sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   position: relative;
   display: inline-block;
   transition: color 0.3s ease, transform 0.3s ease;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.navLink::after {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: #fff;
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-  transform-origin: bottom right;
 }
 
 .navLink:hover {
@@ -78,7 +73,6 @@
 
 .mobileMenuButton {
   display: none; /* Hide by default */
-  background: #444;
   color: #fff;
   border: none;
   padding: 10px;
@@ -86,12 +80,12 @@
 }
 
 .mobileNav {
-  display: flex;
+  display: none;
   flex-direction: column;
   position: absolute;
-  top: 100px;
-  right: 20px;
-  background: #212529;
+  top: 125px;
+  right: 25px;
+  background: #ffffff;
   width: 70;
   border-radius: 5px;
   padding: 10px;
@@ -107,7 +101,7 @@
 .mobileNavLink {
   color: #fff;
   text-decoration: none;
-  padding: 10px;
+  padding: 2px;
   display: block;
 }
 .li {
@@ -122,5 +116,11 @@
 
   .mobileMenuButton {
     display: block; /* Show mobile menu button */
+  }
+  .mobileNav {
+    display: flex;
+  }
+  .navLink {
+    color: #212529;
   }
 }

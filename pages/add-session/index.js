@@ -179,7 +179,13 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
                   </h3>
                   <hr />
                   <div className="bg-dark m-3 p-3 rounded">
-                    <div className="m-2 mb-5">
+                    <div className="m-2">
+                      <label
+                        htmlFor="dateInput"
+                        className="w-100 p-2 text-warning text-center"
+                      >
+                        Date de la séance
+                      </label>
                       <input
                         className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
                         type="date"
@@ -191,6 +197,12 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
                       />
                     </div>
                     <div className="m-2">
+                      <label
+                        htmlFor="descriptionInput"
+                        className="w-100 p-2 text-warning text-center"
+                      >
+                        Description
+                      </label>
                       <textarea
                         className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
                         placeholder="Ajouter des notes"
@@ -219,6 +231,12 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
                         Poids {index + 1}{" "}
                       </h5>
                       <div className="form-group m-3">
+                        <label
+                          htmlFor="muscleGroupInput"
+                          className="w-100 p-2 text-warning text-center"
+                        >
+                          Groupe musculaire
+                        </label>
                         <select
                           className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
                           value={weight.muscle_groupe}
@@ -243,6 +261,12 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
                       </div>
 
                       <div className="form-group m-3">
+                        <label
+                          htmlFor="exerciseInput"
+                          className="w-100 p-2 text-warning text-center"
+                        >
+                          Exercise
+                        </label>
                         <select
                           className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
                           value={weight.exercise}
@@ -264,6 +288,12 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
                         </select>
                       </div>
                       <div className="m-3">
+                        <label
+                          htmlFor="weightInput"
+                          className="w-100 p-2 text-warning text-center"
+                        >
+                          Poids
+                        </label>
                         <input
                           className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
                           type="number"
@@ -278,6 +308,12 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
                         />
                       </div>
                       <div className="m-3">
+                        <label
+                          htmlFor="NombreDeSeriesInput"
+                          className="w-100 p-2 text-warning text-center"
+                        >
+                          Nombre de Séries
+                        </label>
                         <input
                           className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
                           type="number"
@@ -292,6 +328,12 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
                         />
                       </div>
                       <div className="m-3">
+                        <label
+                          htmlFor="NombreDeRepetitionInput"
+                          className="w-100 p-2 text-warning text-center"
+                        >
+                          Nombre de Répétitions
+                        </label>
                         <input
                           className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
                           type="number"
