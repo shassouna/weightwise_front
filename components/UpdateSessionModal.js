@@ -1,7 +1,7 @@
 import Modal from "./Popup";
 import { useRouter } from "next/router";
 
-const AddSession = ({
+const UpdateSessionModal = ({
   isModalOpen,
   setIsModalOpen,
   error,
@@ -9,23 +9,19 @@ const AddSession = ({
   alreadyExist,
   sessionId,
 }) => {
-  console.log(sessionId);
   const router = useRouter();
 
   // close Modal function
   const closeModal = () => {
     setIsModalOpen(false);
-    router.push("/");
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    router.push("/");
+    if (sessionId && success) {
+      router.push(`/sessions/${sessionId}`);
+    }
   };
 
   return (
     <Modal isOpen={isModalOpen} onClose={closeModal}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={closeModal}>
         <div tabIndex="-1" role="dialog">
           <div role="document">
             <div className="modal-body">
@@ -37,7 +33,6 @@ const AddSession = ({
                   </button>
                 </>
               )}
-
               {error && (
                 <>
                   <p className="fs-5">{error}</p>
@@ -62,4 +57,4 @@ const AddSession = ({
   );
 };
 
-export default AddSession;
+export default UpdateSessionModal;

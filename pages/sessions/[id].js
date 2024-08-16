@@ -23,14 +23,14 @@ const SessionPage = (props) => {
       const tab = weights.map(
         (weight) => weight.attributes.muscle_group.data.attributes.name
       );
-      setMuscleGroups([...new Set(tab)].toString());
+      setMuscleGroups([...new Set(tab)]);
     };
 
     setTransformedDate(transformDate(props.session.date));
     getUniqueMuscleGroups(props.weights);
   }, [props.session.date, props.weights]);
 
-  const hadleUpdateWorkout = () => {
+  const handleUpdateWorkout = () => {
     route.push(`/update-session/${props.session.id}`);
   };
 
@@ -39,20 +39,27 @@ const SessionPage = (props) => {
       <div className="d-flex flex-column justify-content-center align-items-center">
         <form className="w-100 p-3 m-3 rounded table-responsive">
           <table className="table table-striped align-middle caption-top">
-            <caption>
+            <caption className="mb-4">
               <span scope="col" className="h4">
                 Date de la séance : {transformDate}
               </span>
             </caption>
             <caption className="mb-4">
               <span scope="col" className="h4">
-                Groupes musculaires : {muscleGroups}
+                Groupes musculaires :
+                {muscleGroups.map((muscle, index) => (
+                  <span>
+                    {index === muscleGroups.length - 1
+                      ? muscle
+                      : " " + muscle + ", "}
+                  </span>
+                ))}
               </span>
             </caption>
             {props.session.description && (
               <caption className="mb-4">
                 <span scope="col" className="h4">
-                  Notes : {props.description}
+                  Notes : {props.session.description}
                 </span>
               </caption>
             )}
@@ -88,7 +95,7 @@ const SessionPage = (props) => {
             <button
               className="btn btn-dark m-3 p-4 col-6 col-md-6 col-lg-2"
               type="button"
-              onClick={hadleUpdateWorkout}
+              onClick={handleUpdateWorkout}
             >
               Modifier Entrainement
             </button>

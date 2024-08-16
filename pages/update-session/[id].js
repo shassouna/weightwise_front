@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import qs from "qs";
-import DeleteWeight from "@/components/DeleteWeight";
-import SuccessMessage from "@/components/SuccessMessage";
+import DeleteWeightModal from "@/components/DeleteWeightModal";
+import UpdateSessionModal from "@/components/UpdateSessionModal";
 import { parseCookies } from "nookies";
 import * as jwt from "jwt-decode";
 
@@ -64,7 +64,6 @@ const AddWeightPage = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    setError(null);
 
     try {
       // update session
@@ -122,6 +121,7 @@ const AddWeightPage = (props) => {
     } finally {
       // Restore the weight entry in the database
       setLoading(false);
+      setIsModalOpen(true);
     }
   };
 
@@ -378,7 +378,7 @@ const AddWeightPage = (props) => {
                     >
                       <span role="status mr-2">Enregistrement...</span>
                       <span
-                        class="spinner-border spinner-border-sm"
+                        className="spinner-border spinner-border-sm"
                         aria-hidden="true"
                       ></span>
                     </button>
@@ -397,7 +397,7 @@ const AddWeightPage = (props) => {
         </form>
       </div>
       {selectedIndex != null && selectedWeightToDelete != null && (
-        <DeleteWeight
+        <DeleteWeightModal
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           id={selectedWeightToDelete}
@@ -408,7 +408,16 @@ const AddWeightPage = (props) => {
           setSelectedIndex={setSelectedIndex}
         />
       )}
-      {success && <SuccessMessage text={success} />}
+      {success && (
+        <UpdateSessionModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          success={success}
+          error={error}
+          alreadyExist={alreadyExist}
+          sessionId={session.id}
+        />
+      )}
     </>
   );
 };

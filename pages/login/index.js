@@ -94,7 +94,7 @@ function Login() {
                   <button className="btn btn-dark w-50" type="submit" disabled>
                     <span role="status mr-2">Connexion...</span>
                     <span
-                      class="spinner-border spinner-border-sm"
+                      className="spinner-border spinner-border-sm"
                       aria-hidden="true"
                     ></span>
                   </button>

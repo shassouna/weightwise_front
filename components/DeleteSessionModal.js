@@ -1,16 +1,15 @@
 import Modal from "./Popup";
 import { useRouter } from "next/router";
 
-const DeleteWeightPage = ({ isModalOpen, setIsModalOpen, id }) => {
+const DeleteWeightModal = ({ isModalOpen, setIsModalOpen, id }) => {
   const router = useRouter();
 
   // close Modal function
-  const closeModal = () => setIsModalOpen(false);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const closeModal = () => {
+    setIsModalOpen(false);
     router.push(`/delete-session/${id}`);
   };
+
   return (
     <Modal isOpen={isModalOpen} onClose={closeModal}>
       <form onSubmit={handleSubmit}>
@@ -33,4 +32,4 @@ const DeleteWeightPage = ({ isModalOpen, setIsModalOpen, id }) => {
   );
 };
 
-export default DeleteWeightPage;
+export default DeleteWeightModal;

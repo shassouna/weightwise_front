@@ -108,7 +108,7 @@ function Register() {
                     >
                       <span role="status mr-2">Inscription...</span>
                       <span
-                        class="spinner-border spinner-border-sm"
+                        className="spinner-border spinner-border-sm"
                         aria-hidden="true"
                       ></span>
                     </button>
@@ -119,9 +119,9 @@ function Register() {
             </div>
           </div>
         ) : (
-          <div class="text-center">
-            <div class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
+          <div className="text-center">
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
             </div>
           </div>
         )}

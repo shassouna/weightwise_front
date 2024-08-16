@@ -2,7 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import qs from "qs";
-import DeleteSession from "../../components/DeleteSession";
+import DeleteSessionModal from "../../components/DeleteSessionModal";
 import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import * as jwt from "jwt-decode";
@@ -143,7 +143,7 @@ const UserPage = ({ workout_sessions }) => {
         )}
       </div>
       {selectedSessionId && (
-        <DeleteSession
+        <DeleteSessionModal
           id={selectedSessionId}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}

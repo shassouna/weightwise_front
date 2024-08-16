@@ -3,7 +3,7 @@ import axios from "axios";
 import qs from "qs";
 import { parseCookies } from "nookies";
 import * as jwt from "jwt-decode";
-import AddSession from "@/components/AddSession";
+import AddSessionModal from "@/components/AddSessionModal";
 
 const today = new Date();
 const todayString = today.toISOString().split("T")[0];
@@ -14,6 +14,7 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
     date: todayString,
     description: "",
   });
+  const [sessionIdResponse, setSessionIdResponse] = useState(null);
   const [weights, setWeights] = useState([
     {
       weight: "",
@@ -65,13 +66,10 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
   // post new session entry to database function
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // vars
+    let sessionId = null;
     setLoading(true);
-    setError(null);
-
     try {
-      // vars
-      let sessionId = null;
-
       // Query to get sessions for the user on the given date, filtered by the user's permissions and the provided session date
       const querySessions = qs.stringify({
         filters: {
@@ -147,6 +145,7 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
       setError(null);
       setSuccess("Poids enregistrés avec succès");
     } catch (error) {
+      console.log(error);
       // Display a warning message
       setAlreadyExist(null);
       setSuccess(null);
@@ -155,6 +154,7 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
       // Restore the weight entry in the database
       setLoading(false);
       setIsModalOpen(true);
+      setSessionIdResponse(sessionId);
     }
   };
 
@@ -377,7 +377,7 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
                   >
                     <span role="status mr-2">Enregistrement...</span>
                     <span
-                      class="spinner-border spinner-border-sm"
+                      className="spinner-border spinner-border-sm"
                       aria-hidden="true"
                     ></span>
                   </button>
@@ -395,13 +395,16 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
           </div>
         </div>
       </form>
-      <AddSession
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        success={success}
-        error={error}
-        alreadyExist={alreadyExist}
-      />
+      {isModalOpen && (
+        <AddSessionModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          success={success}
+          error={error}
+          alreadyExist={alreadyExist}
+          sessionId={sessionIdResponse}
+        />
+      )}
     </div>
   );
 };

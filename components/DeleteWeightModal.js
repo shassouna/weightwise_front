@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Modal from "./Popup";
-import { useRouter } from "next/router";
 import axios from "axios";
-const DeleteWeight = ({
+
+const DeleteWeightModal = ({
   id,
   setSelectedWeightToDelete,
   weights,
@@ -70,7 +70,7 @@ const DeleteWeight = ({
                     >
                       <span role="status mr-2">suppression...</span>
                       <span
-                        class="spinner-border spinner-border-sm"
+                        className="spinner-border spinner-border-sm"
                         aria-hidden="true"
                       ></span>
                     </button>
@@ -109,4 +109,4 @@ const DeleteWeight = ({
   );
 };
 
-export default DeleteWeight;
+export default DeleteWeightModal;
