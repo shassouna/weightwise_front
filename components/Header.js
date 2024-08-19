@@ -98,8 +98,7 @@ const Header = () => {
                   href="/#"
                   className={styles.navLink}
                   style={{
-                    color: "red",
-                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    color: "crimson",
                   }}
                 >
                   Déconnexion

@@ -12,7 +12,7 @@ const DeleteWeightModal = ({ isModalOpen, setIsModalOpen, id }) => {
 
   return (
     <Modal isOpen={isModalOpen} onClose={closeModal}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={closeModal}>
         <div tabIndex="-1" role="dialog">
           <div role="document">
             <div className="modal-body">

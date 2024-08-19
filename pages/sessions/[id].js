@@ -46,7 +46,7 @@ const SessionPage = (props) => {
             </caption>
             <caption className="mb-4">
               <span scope="col" className="h4">
-                Groupes musculaires :
+                {"Groupes musculaires : "}
                 {muscleGroups.map((muscle, index) => (
                   <span>
                     {index === muscleGroups.length - 1

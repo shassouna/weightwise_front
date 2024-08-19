@@ -208,7 +208,7 @@ const AddWeightPage = (props) => {
                           x
                         </div>
                         <h5 className="text-center text-white">
-                          Poids {index + 1}{" "}
+                          Exercice {index + 1}{" "}
                         </h5>
                         <div className="form-group m-3">
                           <label
@@ -246,7 +246,7 @@ const AddWeightPage = (props) => {
                             htmlFor="exerciseInput"
                             className="w-100 p-2 text-warning text-center"
                           >
-                            Exercise
+                            Nom exercise
                           </label>
                           <select
                             style={{ fontWeight: "bold" }}
@@ -279,9 +279,10 @@ const AddWeightPage = (props) => {
                           </label>
                           <input
                             style={{ fontWeight: "bold" }}
-                            className="form-control w-100 p-2 bg-light text-dark rounded-3 text-center"
+                            className=" w-100 p-2 bg-light text-dark rounded-3 text-center"
                             type="number"
-                            min="1"
+                            step="0.01"
+                            min="0"
                             max="300"
                             placeholder="Poids kg"
                             value={weight.weight}

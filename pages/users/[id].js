@@ -42,10 +42,13 @@ const UserPage = ({ workout_sessions }) => {
   const [selectedSessionId, setSelectedSessionId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleUpdateWeight = (id) => {
+  const handleShowWorkout = (id) => {
+    router.push("/sessions/" + id);
+  };
+  const handleUpdateWorkout = (id) => {
     router.push("/update-session/" + id);
   };
-  const handleDeleteWeight = (id) => {
+  const handleDeleteWorkout = (id) => {
     setSelectedSessionId(id);
     setIsModalOpen(true);
   };
@@ -55,22 +58,16 @@ const UserPage = ({ workout_sessions }) => {
 
   return (
     <>
-      <div
-        className="d-flex flex-column justify-content-center align-items-center m-5"
-        style={{ minHeight: "500px" }}
-      >
+      <div className="d-flex flex-column justify-content-center align-items-center m-5">
         {workout_sessions.length > 0 ? (
-          <table className="table w-75" style={{ minWidth: "400px" }}>
+          <table className="table table-striped w-75">
             <thead>
               <tr>
-                <th scope="col" className="text-start">
+                <th scope="col" className="fs-5">
                   Date
                 </th>
-                <th scope="col" className="text-start">
+                <th scope="col" className="fs-5">
                   Muscles
-                </th>
-                <th scope="col" className="text-start">
-                  Exercises
                 </th>
               </tr>
             </thead>
@@ -80,48 +77,50 @@ const UserPage = ({ workout_sessions }) => {
                 const uniqueWeightEntries = getUniqueWeightEntries(
                   workout.weight_entries
                 );
-                const uniqueExercisesEntries = getUniqueExercisesEntries(
-                  workout.weight_entries
-                );
-
                 return (
                   <tr key={workout.id} className="table-light">
-                    <td scope="row" className="text-start">
-                      {workout.date}
+                    <td scope="row" className="fs-5">
+                      {new Date(workout.date).toLocaleDateString("fr-FR", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
                     </td>
-                    <td className="text-start">
-                      {uniqueWeightEntries.map((weight, index) => (
-                        <div key={weight.id} className="list-unstyled">
+                    <td>
+                      {uniqueWeightEntries.map((weight) => (
+                        <div key={weight.id} className="list-unstyled fs-5">
                           {weight.muscle_group.name}
                         </div>
                       ))}
                     </td>
-                    <td className="text-start">
-                      {uniqueExercisesEntries.map((weight) => (
-                        <div key={weight.id}>
-                          {weight.exercise.name}
-                          <br />
-                        </div>
-                      ))}
-                    </td>
-                    <td className="text-end">
-                      <button type="button" className="btn btn-dark m-1">
-                        Details...
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-success m-1"
-                        onClick={() => handleUpdateWeight(workout.id)}
-                      >
-                        Modifier
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger m-1"
-                        onClick={() => handleDeleteWeight(workout.id)}
-                      >
-                        Supprimer
-                      </button>
+                    <td>
+                      <div className="row d-flex justify-content-end m-1">
+                        <button
+                          type="button"
+                          className="btn btn-dark col-sm-6 col-md-6 col-lg-4"
+                          onClick={() => handleShowWorkout(workout.id)}
+                        >
+                          Details...
+                        </button>
+                      </div>
+                      <div className="row d-flex justify-content-end m-1">
+                        <button
+                          type="button"
+                          className="btn btn-success col-sm-6 col-md-6 col-lg-4"
+                          onClick={() => handleUpdateWorkout(workout.id)}
+                        >
+                          Modifier
+                        </button>
+                      </div>
+                      <div className="row d-flex justify-content-end m-1">
+                        <button
+                          type="button"
+                          className="btn btn-danger col-sm-6 col-md-6 col-lg-4"
+                          onClick={() => handleDeleteWorkout(workout.id)}
+                        >
+                          Supprimer
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -206,7 +205,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         user: { id: user.id, username: user.username },
-        workout_sessions: user.workout_sessions,
+        workout_sessions: user.workout_sessions.reverse(),
       },
     };
   } catch (error) {

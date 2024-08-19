@@ -228,7 +228,7 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
                         x
                       </div>
                       <h5 className="text-center text-white">
-                        Poids {index + 1}{" "}
+                        Exercice {index + 1}{" "}
                       </h5>
                       <div className="form-group m-3">
                         <label
@@ -265,7 +265,7 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
                           htmlFor="exerciseInput"
                           className="w-100 p-2 text-warning text-center"
                         >
-                          Exercise
+                          Nom exercise
                         </label>
                         <select
                           className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
@@ -297,7 +297,8 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
                         <input
                           className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
                           type="number"
-                          min="1"
+                          step="0.01"
+                          min="0"
                           max="300"
                           placeholder="Poids kg"
                           value={weight.weight}
@@ -446,7 +447,25 @@ export async function getServerSideProps(context) {
     );
     return {
       props: {
-        exercises: responseExercises.data.data,
+        exercises: responseExercises.data.data.sort((a, b) => {
+          // Extract the first letter of the first word for both items
+          const firstLetterA = a.attributes.name
+            .trim()
+            .split(" ")[0][0]
+            .toLowerCase();
+          const firstLetterB = b.attributes.name
+            .trim()
+            .split(" ")[0][0]
+            .toLowerCase();
+
+          if (firstLetterA < firstLetterB) {
+            return -1; // a should come before b
+          }
+          if (firstLetterA > firstLetterB) {
+            return 1; // a should come after b
+          }
+          return 0;
+        }),
         muscle_groups: responseMuscle_groups.data.data,
         token: verifyToken(token),
       },
