@@ -49,7 +49,7 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <nav className={styles.navLogo}>
-          <Link href="/" className={styles.navLink}>
+          <Link href="/" className={styles.navImgLink}>
             <img src="/main-logo-transparent.svg" alt="Logo" width="100%" />
           </Link>
         </nav>

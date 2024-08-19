@@ -71,6 +71,13 @@
   transform-origin: bottom left;
 }
 
+.navImgLink {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .mobileMenuButton {
   display: none; /* Hide by default */
   color: #fff;
