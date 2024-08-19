@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { parseCookies } from "nookies";
 import * as jwt from "jwt-decode";
+import Link from "next/link";
 
 function Register() {
   const router = useRouter();
@@ -34,6 +35,8 @@ function Register() {
           password: password,
         }
       );
+      localStorage.setItem("email", email);
+      localStorage.setItem("password", password);
       router.push("/login");
     } catch (error) {
       if (
@@ -62,7 +65,7 @@ function Register() {
               <div className="modal-body">
                 <div className="m-3">
                   <input
-                    className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
+                    className="form-control w-100 p-2 fs-6 bg-light text-dark rounded-3 text-center"
                     type="text"
                     placeholder="Nom"
                     value={username}
@@ -72,7 +75,7 @@ function Register() {
                 </div>
                 <div className="m-3">
                   <input
-                    className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
+                    className="form-control w-100 p-2 fs-6 bg-light text-dark rounded-3 text-center"
                     type="email"
                     placeholder="email@example.com"
                     value={email}
@@ -82,7 +85,7 @@ function Register() {
                 </div>
                 <div className="m-3">
                   <input
-                    className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
+                    className="form-control w-100 p-2 fs-6 bg-light text-dark rounded-3 text-center"
                     type="password"
                     placeholder="Mdp"
                     value={password}
@@ -94,7 +97,7 @@ function Register() {
                 <div className="m-3 d-flex justify-content-center">
                   {!loading ? (
                     <button
-                      className="btn btn-dark w-50"
+                      className="btn btn-primary w-50"
                       type="submit"
                       disabled={false}
                     >
@@ -102,7 +105,7 @@ function Register() {
                     </button>
                   ) : (
                     <button
-                      className="btn btn-dark w-50"
+                      className="btn btn-primary w-50"
                       type="submit"
                       disabled
                     >
@@ -114,6 +117,14 @@ function Register() {
                     </button>
                   )}
                 </div>
+                {!loading && (
+                  <Link
+                    href="/login"
+                    className="m-3 d-flex justify-content-center"
+                  >
+                    <span className="text-center">Se connecter</span>
+                  </Link>
+                )}
                 {error && <p className="text-danger text-center"> {error}</p>}
               </div>
             </div>

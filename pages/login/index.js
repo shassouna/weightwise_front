@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../../components/Popup";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { parseCookies } from "nookies";
 import * as jwt from "jwt-decode";
+import Link from "next/link";
 
 function Login() {
   const router = useRouter();
@@ -14,6 +15,13 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (localStorage) {
+      setEmail(localStorage.getItem("email"));
+      setPassword(localStorage.getItem("password"));
+    }
+  }, []);
 
   // Close Modal function
   const closeModal = () => {
@@ -33,7 +41,8 @@ function Login() {
           password: password,
         }
       );
-      setTimeout(() => {}, 2000);
+      localStorage.setItem("email", email);
+      localStorage.setItem("password", password);
       Cookies.set("token", res.data.jwt, { expires: 7, path: "" });
       router.push("/");
     } catch (error) {
@@ -62,7 +71,7 @@ function Login() {
             <div className="modal-body">
               <div className="m-3">
                 <input
-                  className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
+                  className="form-control w-100 p-2 fs-6 bg-light text-dark rounded-3 text-center"
                   type="email"
                   placeholder="email@example.com"
                   value={email}
@@ -72,7 +81,7 @@ function Login() {
               </div>
               <div className="m-3">
                 <input
-                  className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
+                  className="form-control w-100 p-2 fs-6 bg-light text-dark rounded-3 text-center"
                   type="password"
                   placeholder="Mdp"
                   value={password}
@@ -84,14 +93,18 @@ function Login() {
               <div className="m-3 d-flex justify-content-center">
                 {!loading ? (
                   <button
-                    className="btn btn-dark w-50"
+                    className="btn btn-primary w-50"
                     type="submit"
                     disabled={false}
                   >
                     Se connecter
                   </button>
                 ) : (
-                  <button className="btn btn-dark w-50" type="submit" disabled>
+                  <button
+                    className="btn btn-primary w-50"
+                    type="submit"
+                    disabled
+                  >
                     <span role="status mr-2">Connexion...</span>
                     <span
                       className="spinner-border spinner-border-sm"
@@ -101,6 +114,14 @@ function Login() {
                 )}
               </div>
               {error && <p className="text-danger text-center"> {error}</p>}
+              {!loading && (
+                <Link
+                  href="/register"
+                  className="m-3 d-flex justify-content-center"
+                >
+                  <span className="text-center">S'inscrire</span>
+                </Link>
+              )}
             </div>
           </div>
         </div>
