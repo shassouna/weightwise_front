@@ -50,7 +50,7 @@ const Header = () => {
       <div className={styles.container}>
         <nav className={styles.navLogo}>
           <Link href="/" className={styles.navImgLink}>
-            <img src="/main-logo-transparent.svg" alt="Logo" width="100%" />
+            <img src="/logo.png" alt="Logo" width="120px" height="120px" />
           </Link>
         </nav>
         <nav className={styles.nav}>
