@@ -51,7 +51,9 @@ const UserPage = ({ user, workout_sessions }) => {
         {workoutSessions.length > 0 ? (
           <>
             <div className="d-flex flex-column justify-content-center align-items-center">
-              <p className="h3 text-center">Pour une recherche avancée</p>
+              <p className="h3 text-center">
+                Pour effectuer une recherche avancée
+              </p>
               <br />
               <button
                 type="button"
@@ -132,14 +134,14 @@ const UserPage = ({ user, workout_sessions }) => {
           </>
         ) : workout_sessions.length == 0 ? (
           <div className="d-flex flex-column justify-content-center align-items-center">
-            <p className="h3 text-center">Pas d'entrainements enregistrés</p>
+            <p className="h3 text-center">Aucun entraînement enregistré</p>
             <br />
             <button
               type="button"
               className="btn btn-dark"
               onClick={handleLinktoAddSession}
             >
-              Enregistrer entrainement
+              Enregistrer l'entraînement
             </button>
           </div>
         ) : (
@@ -147,7 +149,7 @@ const UserPage = ({ user, workout_sessions }) => {
           workoutSessions.length == 0 && (
             <div className="d-flex flex-column justify-content-center align-items-center">
               <p className="h3 text-center">
-                Pas d'entrainements avec les critères choisis
+                Aucun entraînement avec les critères choisis
               </p>
               <br />
               <button
@@ -155,7 +157,7 @@ const UserPage = ({ user, workout_sessions }) => {
                 className="btn btn-dark"
                 onClick={() => setWorkoutSessions(workout_sessions)}
               >
-                Rénistailiser
+                Réinitialiser
               </button>
             </div>
           )

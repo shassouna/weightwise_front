@@ -265,7 +265,7 @@ const AddWeightPage = ({ exercises, muscle_groups, token }) => {
                           htmlFor="exerciseInput"
                           className="w-100 p-2 text-warning text-center"
                         >
-                          Nom exercise
+                          Nom de l'exercice
                         </label>
                         <select
                           className="form-control w-100 p-2 fs-6 bg-light text-secondary rounded-3 text-center"
