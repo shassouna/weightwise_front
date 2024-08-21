@@ -97,7 +97,7 @@ const SessionPage = (props) => {
               type="button"
               onClick={handleUpdateWorkout}
             >
-              Modifier Entrainement
+              Modifier Entraînement
             </button>
           </div>
         </form>

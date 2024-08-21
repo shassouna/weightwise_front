@@ -25,7 +25,7 @@ const Accueil = ({ token }) => {
           type="button"
           onClick={hadleAddWorkout}
         >
-          Enregistrer Entrainement
+          Enregistrer Entraînement
         </button>
       </div>
       <div className="row d-flex justify-content-center">
@@ -34,7 +34,7 @@ const Accueil = ({ token }) => {
           type="button"
           onClick={handleShowWorkout}
         >
-          Voir mes Entrainements
+          Voir mes Entraînements
         </button>
       </div>
     </div>

@@ -60,7 +60,7 @@ const Header = () => {
                 href={userId ? `/users/${userId}` : "/login"}
                 className={styles.navLink}
               >
-                Mes Entrainements
+                Mes Entraînements
               </Link>
             </li>
             <li className={styles.li}>
@@ -68,7 +68,7 @@ const Header = () => {
                 href={userId ? `/add-session` : "/login"}
                 className={styles.navLink}
               >
-                Enregistrer Entrainement
+                Enregistrer Entraînement
               </Link>
             </li>
             {!isLoggedIn ? (
@@ -130,7 +130,7 @@ const Header = () => {
                   href={userId ? `/users/${userId}` : "/login"}
                   className={styles.navLink}
                 >
-                  Mes Entrainements
+                  Mes Entraînements
                 </Link>
               </li>
               <li className={styles.li}>
@@ -138,7 +138,7 @@ const Header = () => {
                   href={userId ? `/add-session` : "/login"}
                   className={styles.navLink}
                 >
-                  Enregistrer Entrainement
+                  Enregistrer Entraînement
                 </Link>
               </li>
               {!isLoggedIn ? (
