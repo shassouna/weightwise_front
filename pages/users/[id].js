@@ -62,7 +62,7 @@ const UserPage = ({ user, workout_sessions }) => {
               </button>
             </div>
             <br /> <br />
-            <table className="table table-striped w-75">
+            <table className="table table-striped">
               <thead>
                 <tr>
                   <th scope="col" className="fs-5">
