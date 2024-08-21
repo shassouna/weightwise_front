@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import qs from "qs";
 import DeleteSessionModal from "../../components/DeleteSessionModal";
+import AdvanceSearch from "@/components/AdvanceSearch";
 import { useRouter } from "next/router";
 import { parseCookies } from "nookies";
 import * as jwt from "jwt-decode";
@@ -22,25 +23,13 @@ const getUniqueWeightEntries = (entries) => {
   return uniqueEntries;
 };
 
-const getUniqueExercisesEntries = (entries) => {
-  const uniqueEntries = [];
-  const seen = new Set();
-
-  entries.forEach((entry) => {
-    if (!seen.has(entry.exercise.name)) {
-      uniqueEntries.push(entry);
-      seen.add(entry.exercise.name);
-    }
-  });
-
-  return uniqueEntries;
-};
-
-const UserPage = ({ workout_sessions }) => {
+const UserPage = ({ user, workout_sessions }) => {
   const router = useRouter();
 
   const [selectedSessionId, setSelectedSessionId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
+  const [workoutSessions, setWorkoutSessions] = useState(workout_sessions);
 
   const handleShowWorkout = (id) => {
     router.push("/sessions/" + id);
@@ -58,76 +47,90 @@ const UserPage = ({ workout_sessions }) => {
 
   return (
     <>
-      <div className="d-flex flex-column justify-content-center align-items-center m-5">
-        {workout_sessions.length > 0 ? (
-          <table className="table table-striped w-75">
-            <thead>
-              <tr>
-                <th scope="col" className="fs-5">
-                  Date
-                </th>
-                <th scope="col" className="fs-5">
-                  Muscles
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {workout_sessions.map((workout) => {
-                // Obtenir des entrées de poids uniques pour chaque session
-                const uniqueWeightEntries = getUniqueWeightEntries(
-                  workout.weight_entries
-                );
-                return (
-                  <tr key={workout.id} className="table-light">
-                    <td scope="row" className="fs-5">
-                      {new Date(workout.date).toLocaleDateString("fr-FR", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </td>
-                    <td>
-                      {uniqueWeightEntries.map((weight) => (
-                        <div key={weight.id} className="list-unstyled fs-5">
-                          {weight.muscle_group.name}
+      <div className="d-flex flex-column justify-content-center align-items-center m-2">
+        {workoutSessions.length > 0 ? (
+          <>
+            <div className="d-flex flex-column justify-content-center align-items-center">
+              <p className="h3 text-center">Pour une recherche avancée</p>
+              <br />
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => setIsModalOpen2(true)}
+              >
+                Cliquez ici
+              </button>
+            </div>
+            <br /> <br />
+            <table className="table table-striped w-75">
+              <thead>
+                <tr>
+                  <th scope="col" className="fs-5">
+                    Date
+                  </th>
+                  <th scope="col" className="fs-5">
+                    Muscles
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {workoutSessions.map((workout) => {
+                  // Obtenir des entrées de poids uniques pour chaque session
+                  const uniqueWeightEntries = getUniqueWeightEntries(
+                    workout.weight_entries
+                  );
+                  return (
+                    <tr key={workout.id} className="table-light">
+                      <td scope="row" className="fs-5">
+                        {new Date(workout.date).toLocaleDateString("fr-FR", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })}
+                      </td>
+                      <td>
+                        {uniqueWeightEntries.map((weight) => (
+                          <div key={weight.id} className="list-unstyled fs-5">
+                            {weight.muscle_group.name}
+                          </div>
+                        ))}
+                      </td>
+                      <td>
+                        <div className="row d-flex justify-content-end m-1">
+                          <button
+                            type="button"
+                            className="btn btn-dark col-sm-6 col-md-6 col-lg-4"
+                            onClick={() => handleShowWorkout(workout.id)}
+                          >
+                            Details...
+                          </button>
                         </div>
-                      ))}
-                    </td>
-                    <td>
-                      <div className="row d-flex justify-content-end m-1">
-                        <button
-                          type="button"
-                          className="btn btn-dark col-sm-6 col-md-6 col-lg-4"
-                          onClick={() => handleShowWorkout(workout.id)}
-                        >
-                          Details...
-                        </button>
-                      </div>
-                      <div className="row d-flex justify-content-end m-1">
-                        <button
-                          type="button"
-                          className="btn btn-success col-sm-6 col-md-6 col-lg-4"
-                          onClick={() => handleUpdateWorkout(workout.id)}
-                        >
-                          Modifier
-                        </button>
-                      </div>
-                      <div className="row d-flex justify-content-end m-1">
-                        <button
-                          type="button"
-                          className="btn btn-danger col-sm-6 col-md-6 col-lg-4"
-                          onClick={() => handleDeleteWorkout(workout.id)}
-                        >
-                          Supprimer
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        ) : (
+                        <div className="row d-flex justify-content-end m-1">
+                          <button
+                            type="button"
+                            className="btn btn-success col-sm-6 col-md-6 col-lg-4"
+                            onClick={() => handleUpdateWorkout(workout.id)}
+                          >
+                            Modifier
+                          </button>
+                        </div>
+                        <div className="row d-flex justify-content-end m-1">
+                          <button
+                            type="button"
+                            className="btn btn-danger col-sm-6 col-md-6 col-lg-4"
+                            onClick={() => handleDeleteWorkout(workout.id)}
+                          >
+                            Supprimer
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </>
+        ) : workout_sessions.length == 0 ? (
           <div className="d-flex flex-column justify-content-center align-items-center">
             <p className="h3 text-center">Pas d'entrainements enregistrés</p>
             <br />
@@ -139,6 +142,23 @@ const UserPage = ({ workout_sessions }) => {
               Enregistrer entrainement
             </button>
           </div>
+        ) : (
+          workout_sessions.length != 0 &&
+          workoutSessions.length == 0 && (
+            <div className="d-flex flex-column justify-content-center align-items-center">
+              <p className="h3 text-center">
+                Pas d'entrainements avec les critères choisis
+              </p>
+              <br />
+              <button
+                type="button"
+                className="btn btn-dark"
+                onClick={() => setWorkoutSessions(workout_sessions)}
+              >
+                Rénistailiser
+              </button>
+            </div>
+          )
         )}
       </div>
       {selectedSessionId && (
@@ -148,6 +168,12 @@ const UserPage = ({ workout_sessions }) => {
           setIsModalOpen={setIsModalOpen}
         />
       )}
+      <AdvanceSearch
+        userId={user.id}
+        isModalOpen={isModalOpen2}
+        setIsModalOpen={setIsModalOpen2}
+        setWorkoutSessions={setWorkoutSessions}
+      />
     </>
   );
 };
@@ -211,7 +237,7 @@ export async function getServerSideProps(context) {
   } catch (error) {
     console.error("Erreur lors de la récupération de l’utilisateur:", error);
     return {
-      props: { user: null },
+      props: { user: null, workout_sessions: [] },
     };
   }
 }

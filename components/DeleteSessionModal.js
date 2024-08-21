@@ -7,6 +7,10 @@ const DeleteWeightModal = ({ isModalOpen, setIsModalOpen, id }) => {
   // close Modal function
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleSubmit = () => {
+    setIsModalOpen(false);
     router.push(`/delete-session/${id}`);
   };
 
@@ -20,7 +24,11 @@ const DeleteWeightModal = ({ isModalOpen, setIsModalOpen, id }) => {
                 <p className="fs-5">
                   Voulez vous vraiment supprimer la session.
                 </p>
-                <button type="submit" className="btn btn-danger">
+                <button
+                  type="submit"
+                  className="btn btn-danger"
+                  onClick={handleSubmit}
+                >
                   Supprimer
                 </button>
               </>
