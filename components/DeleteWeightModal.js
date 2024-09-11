@@ -15,6 +15,7 @@ const DeleteWeightModal = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+
   // close Modal function
   const closeModal = () => {
     setSelectedIndex(null);
@@ -52,7 +53,7 @@ const DeleteWeightModal = ({
               {error == null && success == null && !loading && (
                 <>
                   <p className="fs-5">
-                    Voulez vous vraiment supprimer le poids.
+                    Voulez vous vraiment supprimer le poids ?
                   </p>
                   {!loading ? (
                     <button

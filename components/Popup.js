@@ -2,14 +2,8 @@
 import React from "react";
 import styles from "./Popup.module.css";
 import { useRouter } from "next/router";
-const Popup = ({ isOpen, onClose, children, login }) => {
+const Popup = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
-
-  const route = useRouter();
-
-  /* const handleRedirect = (url) => {
-    route.push(url);
-  };*/
 
   const handleClose = () => {
     onClose();

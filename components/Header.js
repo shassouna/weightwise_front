@@ -123,7 +123,12 @@ const Header = () => {
         )}
 
         {isMobileMenuOpen && (
-          <nav className={styles.mobileNav}>
+          <nav
+            className={styles.mobileNav}
+            onClick={() => {
+              setMobileMenuOpen(false);
+            }}
+          >
             <ul className={styles.mobileNavList}>
               <li className={styles.li}>
                 <Link
